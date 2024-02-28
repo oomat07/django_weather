@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5h3-x35&&98yl_zw!vvto0cx!0!+-%r1^d_&x^0=9e89ozmw33'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-5h3-x35&&98yl_zw!vvto0cx!0!+-%r1^d_&x^0=9e89ozmw33')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+
+API_KEY = os.getenv('API_KEY', None)
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'weather_app'
 ]
 
 MIDDLEWARE = [
